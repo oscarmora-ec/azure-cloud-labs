@@ -11,7 +11,7 @@
 # Step 1 - Login as owner account first
 # This is required to access Key Vault
 echo "Step 1: Logging in as owner account..."
-az login --tenant eacf9e47-b12c-4e9b-a510-0e3c06b6aaaf
+az login --tenant $AZURE_TENANT
 
 # Step 2 - Retrieve SP credentials from Key Vault
 # Credentials are stored securely, never hardcoded
@@ -23,7 +23,7 @@ SP_APPID=$(az keyvault secret show \
     --output tsv)
 
 SP_SECRET=$(az keyvault secret show \
-    --vault-name playspot-kv \
+    --vault-name $PLAYSPOT_KV \
     --name "playspot-sp-secret" \
     --query value \
     --output tsv)
