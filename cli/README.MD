@@ -121,3 +121,38 @@ az ad sp list --output table
 # Use --help on any command for documentation
 az group --help
 ```
+
+## Resource Lifecycle
+```bash
+# Create a resource group
+az group create \
+--name cli-practice-rg \
+--location eastus2 \
+--tags Project=Learning Environment=Dev Owner=Oscar
+
+# Create a storage account
+az storage account create \
+--name clipracticestorage001 \
+--resource-group cli-practice-rg \
+--location eastus2 \
+--sku Standard_LRS \
+--kind StorageV2 \
+--access-tier Cool
+
+# Verify storage account
+az storage account list \
+--resource-group cli-practice-rg \
+--output table
+
+# Delete storage account
+az storage account delete \
+--name clipracticestorage001 \
+--resource-group cli-practice-rg \
+--yes
+
+# Delete resource group and everything in it
+az group delete --name cli-practice-rg --yes
+
+# Verify cleanup
+az group list --output table
+```
